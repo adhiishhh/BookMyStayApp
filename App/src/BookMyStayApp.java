@@ -164,6 +164,25 @@ public class BookMyStayApp {
         System.out.println("Single: " + inventory.getRoomAvailability().get("Single"));
         System.out.println("Double: " + inventory.getRoomAvailability().get("Double"));
         System.out.println("Suite: " + inventory.getRoomAvailability().get("Suite"));
+
+        // UC12
+        System.out.println("\n===== UC12: Data Persistence & Recovery =====");
+
+        FilePersistenceService persistenceService = new FilePersistenceService();
+
+        String filePath = "inventory.txt";
+
+// Load existing data
+        persistenceService.loadInventory(inventory, filePath);
+
+// Show current inventory
+        System.out.println("\nCurrent Inventory:");
+        System.out.println("Single: " + inventory.getRoomAvailability().get("Single"));
+        System.out.println("Double: " + inventory.getRoomAvailability().get("Double"));
+        System.out.println("Suite: " + inventory.getRoomAvailability().get("Suite"));
+
+// Save data
+        persistenceService.saveInventory(inventory, filePath);
     }
 
 }
