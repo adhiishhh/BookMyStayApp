@@ -110,6 +110,23 @@ public class BookMyStayApp {
 
             System.out.println("Booking failed: " + e.getMessage());
         }
+        // UC10
+        System.out.println("\n===== UC10: Booking Cancellation =====");
+
+        CancellationService cancellationService = new CancellationService();
+
+// Register booking (example)
+        cancellationService.registerBooking("Single-1", "Single");
+
+// Cancel booking
+        cancellationService.cancelBooking("Single-1", inventory);
+
+// Show rollback history
+        cancellationService.showRollbackHistory();
+
+// Show updated inventory
+        System.out.println("\nUpdated Single Room Availability: " +
+                inventory.getRoomAvailability().get("Single"));
     }
 
 }
