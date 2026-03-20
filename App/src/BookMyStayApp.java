@@ -91,6 +91,25 @@ public class BookMyStayApp {
 // Generate report
         BookingReportService reportService = new BookingReportService();
         reportService.generateReport(history);
+
+        // UC9
+        System.out.println("\n===== UC9: Error Handling & Validation =====");
+
+        ReservationValidator validator = new ReservationValidator();
+
+        try {
+
+            // Valid case
+            validator.validate("Adhi", "Single", inventory);
+            System.out.println("Valid booking for Adhi");
+
+            // Invalid case (wrong room type)
+            validator.validate("Subha", "Luxury", inventory);
+
+        } catch (InvalidBookingException e) {
+
+            System.out.println("Booking failed: " + e.getMessage());
+        }
     }
 
 }
