@@ -59,6 +59,24 @@ public class BookMyStayApp {
             Reservation r = bookingQueue2.getNextRequest();
             allocationService.allocateRoom(r, inventory);
         }
+        // UC7
+        System.out.println("\n===== UC7: Add-On Services =====");
+
+        AddOnServiceManager serviceManager = new AddOnServiceManager();
+
+// Example reservation ID (from UC6)
+        String reservationId = "Single-1";
+
+// Add services
+        serviceManager.addService(reservationId, new AddOnService("Breakfast", 500));
+        serviceManager.addService(reservationId, new AddOnService("Spa", 1000));
+
+// Calculate total cost
+        double totalCost = serviceManager.calculateTotalServiceCost(reservationId);
+
+        System.out.println("\nAdd-On Service Selection");
+        System.out.println("Reservation ID: " + reservationId);
+        System.out.println("Total Add-On Cost: ₹" + totalCost);
     }
 }
 
