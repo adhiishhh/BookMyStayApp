@@ -77,6 +77,21 @@ public class BookMyStayApp {
         System.out.println("\nAdd-On Service Selection");
         System.out.println("Reservation ID: " + reservationId);
         System.out.println("Total Add-On Cost: ₹" + totalCost);
+
+        // UC8
+        System.out.println("\n===== UC8: Booking History & Reporting =====");
+
+        BookingHistory history = new BookingHistory();
+
+// Add confirmed bookings (example)
+        history.addReservation(new Reservation("Abhi", "Single"));
+        history.addReservation(new Reservation("Subha", "Double"));
+        history.addReservation(new Reservation("Vanmathi", "Suite"));
+
+// Generate report
+        BookingReportService reportService = new BookingReportService();
+        reportService.generateReport(history);
     }
+
 }
 
