@@ -41,5 +41,24 @@ public class BookMyStayApp {
             System.out.println("Guest: " + r.getGuestName() +
                     " | Room: " + r.getRoomType());
         }
+
+        // UC6
+        System.out.println("\n===== UC6: Room Allocation =====");
+
+        RoomAllocationService allocationService = new RoomAllocationService();
+
+// recreate queue
+        BookingRequestQueue bookingQueue2 = new BookingRequestQueue();
+
+        bookingQueue2.addRequest(new Reservation("Abhi", "Single"));
+        bookingQueue2.addRequest(new Reservation("Subha", "Single"));
+        bookingQueue2.addRequest(new Reservation("Vanmathi", "Suite"));
+
+// process queue
+        while (bookingQueue2.hasPendingRequests()) {
+            Reservation r = bookingQueue2.getNextRequest();
+            allocationService.allocateRoom(r, inventory);
+        }
     }
 }
+
