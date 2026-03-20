@@ -127,6 +127,43 @@ public class BookMyStayApp {
 // Show updated inventory
         System.out.println("\nUpdated Single Room Availability: " +
                 inventory.getRoomAvailability().get("Single"));
+
+        // UC11
+        System.out.println("\n===== UC11: Concurrent Booking Simulation =====");
+
+// reuse bookingQueue (already declared before)
+        bookingQueue = new BookingRequestQueue();
+
+// Add requests
+        bookingQueue.addRequest(new Reservation("Abhi", "Single"));
+        bookingQueue.addRequest(new Reservation("Vanmathi", "Double"));
+        bookingQueue.addRequest(new Reservation("Kural", "Suite"));
+        bookingQueue.addRequest(new Reservation("Subha", "Single"));
+
+// Create threads
+        Thread t1 = new Thread(new ConcurrentBookingProcessor(
+                bookingQueue, inventory, allocationService));
+
+        Thread t2 = new Thread(new ConcurrentBookingProcessor(
+                bookingQueue, inventory, allocationService));
+
+// Start threads
+        t1.start();
+        t2.start();
+
+// Wait for threads
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
+        }
+
+// Show inventory
+        System.out.println("\nRemaining Inventory:");
+        System.out.println("Single: " + inventory.getRoomAvailability().get("Single"));
+        System.out.println("Double: " + inventory.getRoomAvailability().get("Double"));
+        System.out.println("Suite: " + inventory.getRoomAvailability().get("Suite"));
     }
 
 }
